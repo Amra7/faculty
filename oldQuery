@@ -1,0 +1,46 @@
+/* alias */
+/* neki query pravo_ime_kolone AS zeljeno_ime */ 
+select name as Ime, surname as Prezime, study_year as Godina 
+from Students
+where Godina > 2;
+
+/* count() */
+select count(name) BrojStudenata from Students;
+
+/* prosjecna plata profesor */
+/* avg() */
+select avg(salary) as ProsjecnaPlata from Lecturers;
+
+/* sum() */
+select sum(salary) as UkupnaPlata from Lecturers;
+
+/* multiple function*/
+select sum(salary) as UkupnaPlata, avg(salary) as ProsjecnaPlata from Lecturers;
+
+/* desd=  od najveceg do namanjeg */
+select name, salary from lecturers order by salary DESC;
+
+/* najveci rezultat */
+select max(salary) as Najveca, min(salary) as Najmanja from Lecturers;
+
+/* najmanji najveci varcha */
+select max(name) as Najveca, min(name) as Najmanja from Lecturers;
+
+/* inner join trai tacno gdje trebada join-a*/
+
+/* we want to print name course*/
+select name as cn from courses;
+
+/* ime predmeta i ime profesora koji predaje taj predmet*/
+/* we want to print name of lecturer and name oc course he thaught */
+select name as cn, lecturer_id  as lid from courses
+inner join course_taught on courses.code = course_taught.course_code;
+
+/* kada ne napisem "on" prave se sve kombinacije svakog 
+imena pradavaca sa svakim imnom kursa pa opet sa svakim brojem */
+select courses.name as cn, lecturers.name  as ln from courses
+inner join course_taught on courses.code = course_taught.course_code
+inner join lecturers on course_taught.lecturer_id = lecturers.id;
+
+/* romjena naziva tables */
+alter table lec rename to lecturers ;
